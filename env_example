@@ -1,0 +1,6 @@
+MYSQL_DATABASE=<DB-NAME>
+MYSQL_USER=<user-name>
+MYSQL_PASSWORD=<super-duper-password>
+
+# Rust soporta usar placeholders
+DATABASE_URL=mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@127.0.0.1:33060/${MYSQL_DATABASE}

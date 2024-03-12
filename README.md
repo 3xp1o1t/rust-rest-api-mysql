@@ -52,6 +52,13 @@ Entrar en el contenedor
 docker exec -it mysql-db mysql -p
 ```
 
+Crear la Base de datos
+
+```bash
+# dentro del contenedor de mysql
+create database <nombre de tu db en el archivo .env>
+```
+
 ## Hot reload para proyecto de rust
 
 Normalmente el proyecto se compila y se ejecuta

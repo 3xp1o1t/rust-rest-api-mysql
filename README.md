@@ -7,6 +7,7 @@
   - [Acerca de](#acerca-de)
   - [Dependencias](#dependencias)
   - [Setup](#setup)
+  - [Hot reload para proyecto de rust](#hot-reload-para-proyecto-de-rust)
   - [Referencias](#referencias)
 
 ## Acerca de
@@ -50,6 +51,32 @@ Entrar en el contenedor
 ```bash
 docker exec -it mysql-db mysql -p
 ```
+
+## Hot reload para proyecto de rust
+
+Normalmente el proyecto se compila y se ejecuta
+
+```bash
+cargo build
+cargo run
+```
+
+Existe una crate llamado `cargo-watch` que funge como hot reloader
+
+Instalar cargo-watch
+
+```bash
+cargo install cargo-watch
+```
+
+Ejecutar el watch sobre la carpeta src/ que normalmente cambia
+
+```bash
+cargo watch -q -c -w src/ -x run
+```
+
+Ahora cada cambio en un archivo dentro de src, provocara re-compilar el proyecto y
+ejecutarlo por si solo.
 
 ## Referencias
 

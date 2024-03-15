@@ -11,7 +11,8 @@ use serde_json::json;
 
 use crate::{
     model::{NoteModel, NoteModelResponse},
-    schema::{AppState, CreateNoteSchema, FilterOptions, UpdateNoteSchema},
+    schema::{CreateNoteSchema, FilterOptions, UpdateNoteSchema},
+    AppState,
 };
 
 // Health check
@@ -30,7 +31,7 @@ pub async fn health_check_handler() -> impl IntoResponse {
 pub async fn note_list_handler(
     opts: Option<Query<FilterOptions>>,
     State(data): State<Arc<AppState>>,
-) -> Result<impl IntoResponse, (StatusCode, Json<serder_json::Value>)> {
+) -> Result<impl IntoResponse, (StatusCode, Json<serde_json::Value>)> {
     // Parametro
     let Query(opts) = opts.unwrap_or_default();
 
@@ -66,7 +67,7 @@ pub async fn note_list_handler(
       "notes": note_response
     });
 
-    Ok(Json(json_response));
+    Ok(Json(json_response))
 }
 
 // crear nota

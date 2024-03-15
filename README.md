@@ -85,6 +85,49 @@ cargo watch -q -c -w src/ -x run
 Ahora cada cambio en un archivo dentro de src, provocara re-compilar el proyecto y
 ejecutarlo por si solo.
 
+Instalar la utilidad de `sqlx` para ejecutar las consultas y migraciones
+
+```bash
+cargo install sqlx-cli
+```
+
+Generar los archivos de migracion
+
+```bash
+sqlx migrate add -r create_notes_table
+```
+
+Una vez generados los 2 archivos, se agregan la consulta de creacion y eliminacion de la tabla.
+
+```sql
+-- Crear tabla notas
+CREATE TABLE IF NOT EXISTS notes (
+    id CHAR(36) PRIMARY KEY NOT NULL,
+    title VARCHAR(255) NOT NULL UNIQUE,
+    content TEXT NOT NULL,
+    is_published BOOLEAN NOT NULL DEFAULT FALSE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+```
+
+```sql
+-- Eliminar tabla notas
+DROP TABLE IF EXISTS notes;
+```
+
+Ejecutar las migraciones
+
+```bash
+sqlx migrate run
+```
+
+`Revertir la migracion`
+
+```bash
+sqlx migrate revert
+```
+
 ## Referencias
 
 [Guía completa](https://medium.com/@raditzlawliet/build-crud-rest-api-with-rust-and-mysql-using-axum-sqlx-d7e50b3cd130)
